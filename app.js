@@ -31,7 +31,7 @@ function addNote(e) {
     text: newNoteText,
   };
 
-  notesList = [...notesList, newNoteObj];
+  notesList = [newNoteObj,...notesList];
 
   createHtml();
 
