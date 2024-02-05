@@ -22,7 +22,7 @@ function addNote(e) {
   const newNoteText = document.getElementById("newNoteTextId").value;
 
   if (newNoteText === "") {
-    showErrorMessage("Nota vacía");
+    showErrorMessage("Nota vacía, añade tu mensaje");
     return;
   }
 
@@ -42,7 +42,7 @@ function showErrorMessage(message) {
   const errorDiv = document.createElement("p");
   errorDiv.textContent = message;
   errorDiv.classList.add("error");
-  const container = document.querySelector(".container");
+  const container = document.querySelector(".noteForm");
   container.appendChild(errorDiv);
   setTimeout(() => {
     errorDiv.remove();
@@ -53,21 +53,17 @@ function createHtml() {
   cleanHtml();
   if (notesList.length > 0) {
     notesList.forEach((note) => {
-      const noteHtml = document.createElement("div");
-      noteHtml.classList.add("note");
 
-      const noteText = document.createElement("textarea");
-      noteText.classList.add("noteText");
-      noteText.innerHTML = note.text;
+      const noteHtml = document.createElement("li");
+      noteHtml.innerHTML = note.text;
 
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("deleteButton");
-      deleteButton.innerHTML = "Eliminar";
+      deleteButton.innerHTML = "Borrar";
       deleteButton.onclick = () => {
         deleteNote(note.id);
       }
 
-      noteHtml.appendChild(noteText);
       noteHtml.appendChild(deleteButton);
 
       selectedNotesList.appendChild(noteHtml);
@@ -97,34 +93,3 @@ function cleanHtml() {
 
 //#endregion
 
-// const listNotes = () => {
-//   const notes = localStorage.getItem("notes")
-//     ? JSON.parse(localStorage.getItem("notes"))
-//     : [];
-//   notes.map((note, index) => {
-//     listNoteCards.innerHTML += `
-//         <div class="card">
-//           <div class="card-body">
-//             <h5 class="card-title">${note.title}</h5>
-//             <p class="card-text">${note.text}</p>
-//             <button class="btn btn-danger" onclick="deleteNote(${index})">Delete</button>
-//           </div>
-//         </div>
-//       `;
-//   });
-// };
-
-
-// function createNoteCard(title, description) {
-//   const div = document.createElement("div");
-//   div.className = "card";
-//   div.innerHTML = `
-//         <div class="card-header">
-//             <h2>${title}</h2>
-//         </div>
-//         <div class="card-body">
-//             <p>${description}</p>
-//         </div>
-//     `;
-//   listNoteCards.appendChild(div);
-// }
